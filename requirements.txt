@@ -1,1 +1,15 @@
 
+streamlit>=1.37.0
+streamlit-option-menu>=0.4.0
+streamlit-lottie>=0.0.5
+streamlit-extras>=0.5.0
+
+pandas>=2.2.2
+numpy>=2.0.0
+plotly>=5.22.0
+Pillow>=10.4.0
+
+requests>=2.32.3
+streamlit-timeline>=0.0.2
+streamlit-card>=1.0.2
+streamlit-shadcn-ui>=0.1.18
