@@ -179,3 +179,76 @@ transform:translateY(-5px);
 box-shadow:0 15px 35px rgba(56,189,248,.25);
 
 }
+.project-card{
+
+padding:25px;
+
+background:rgba(255,255,255,.07);
+
+border-radius:20px;
+
+margin-bottom:25px;
+
+border:1px solid rgba(255,255,255,.12);
+
+transition:.4s;
+
+height:320px;
+
+}
+
+.project-card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 15px 40px rgba(56,189,248,.25);
+
+}
+
+.cert-card{
+
+padding:20px;
+
+background:rgba(255,255,255,.06);
+
+border-radius:18px;
+
+margin-bottom:20px;
+
+border-left:5px solid #38bdf8;
+
+transition:.4s;
+
+}
+
+.cert-card:hover{
+
+transform:scale(1.03);
+
+background:rgba(255,255,255,.1);
+
+}
+
+.timeline{
+
+padding:25px;
+
+margin-bottom:20px;
+
+background:rgba(255,255,255,.06);
+
+border-left:6px solid #3b82f6;
+
+border-radius:15px;
+
+transition:.3s;
+
+}
+
+.timeline:hover{
+
+transform:translateX(10px);
+
+box-shadow:0 10px 30px rgba(0,0,0,.3);
+
+}
