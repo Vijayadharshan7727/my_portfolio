@@ -144,3 +144,38 @@ transform:translateY(0px);
 }
 
 }
+.stProgress > div > div > div > div{
+
+background:linear-gradient(
+90deg,
+#06b6d4,
+#3b82f6,
+#8b5cf6);
+
+border-radius:20px;
+
+}
+
+[data-testid="metric-container"]{
+
+background:rgba(255,255,255,.06);
+
+padding:20px;
+
+border-radius:20px;
+
+border:1px solid rgba(255,255,255,.15);
+
+box-shadow:0 10px 20px rgba(0,0,0,.2);
+
+transition:.3s;
+
+}
+
+[data-testid="metric-container"]:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 15px 35px rgba(56,189,248,.25);
+
+}
