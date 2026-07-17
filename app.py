@@ -1,6 +1,9 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
+from components.statistics import statistics
+from components.footer import footer
+
 st.set_page_config(
     page_title="Vijayadharshan | AI Portfolio",
     page_icon="🤖",
@@ -20,6 +23,31 @@ def load_css():
         )
 
 load_css()
+
+# ----------------------------
+# THEME TOGGLE
+# ----------------------------
+
+theme = st.toggle("🌙 Dark Theme", value=True)
+
+if theme:
+    st.markdown("""
+    <style>
+    .stApp{
+        background:#020617;
+        color:white;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+else:
+    st.markdown("""
+    <style>
+    .stApp{
+        background:white;
+        color:black;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 # ----------------------------
 # SIDEBAR
@@ -54,35 +82,36 @@ with st.sidebar:
     )
 
 # ----------------------------
-# HOME
+# PAGE ROUTING
 # ----------------------------
 
 if selected == "Home":
-
     from pages.home import home
     home()
 
 elif selected == "About":
-
     from pages.about import about
     about()
 
 elif selected == "Skills":
-
     from pages.skills import skills
     skills()
 
 elif selected == "Projects":
-
     from pages.projects import projects
     projects()
 
 elif selected == "Certificates":
-
     from pages.certificates import certificates
     certificates()
 
 elif selected == "Contact":
-
     from pages.contact import contact
     contact()
+
+# ----------------------------
+# FOOTER
+# ----------------------------
+
+statistics()
+footer()
