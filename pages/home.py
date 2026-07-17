@@ -1,116 +1,139 @@
-import streamlit as st
 import os
+import streamlit as st
+from streamlit_option_menu import option_menu
 
-def home():
+# ============================
+# PAGE CONFIG
+# ============================
 
-    col1, col2 = st.columns([1, 2])
+st.set_page_config(
+    page_title="Vijayadharshan | AI Portfolio",
+    page_icon="🤖",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
 
-    with col1:
-        image_path = "assets/profile.png"
+# ============================
+# LOAD CSS
+# ============================
 
-        if os.path.exists(image_path):
-            st.image(image_path, width=280)
-        else:
-            st.warning("Profile image not found.")
+def load_css():
+    css_path = "css/style.css"
 
-    with col2:
+    if os.path.exists(css_path):
+        with open(css_path) as f:
+            st.markdown(
+                f"<style>{f.read()}</style>",
+                unsafe_allow_html=True
+            )
 
-        st.markdown("""
-<div class="hero">
+load_css()
 
-<div class="big">
-Vijayadharshan R
-</div>
+# ============================
+# THEME
+# ============================
 
-<div class="small">
+theme = st.toggle("🌙 Dark Theme", value=True)
 
-🚀 AI Engineer<br>
-📊 Data Scientist<br>
-🤖 Machine Learning Developer
-
-</div>
-
-<br>
-
-Artificial Intelligence & Data Science undergraduate passionate about
-building intelligent AI applications, Machine Learning models,
-Data Science solutions and Full Stack applications.
-
-<br><br>
-
-📍 Coimbatore
-
-📧 dharshanvijay7727@gmail.com
-
-📱 +91 63842 27515
-
-</div>
-""", unsafe_allow_html=True)
-
-    st.write("")
-
-    c1, c2, c3 = st.columns(3)
-
-    with c1:
-        st.link_button(
-            "🐙 GitHub",
-            "https://github.com/Vijayadharshan7727",
-            use_container_width=True
-        )
-
-    with c2:
-        st.link_button(
-            "💼 LinkedIn",
-            "https://www.linkedin.com/in/dharshanvijay7727/",
-            use_container_width=True
-        )
-
-    with c3:
-
-        resume_path = "assets/resume.pdf"
-
-        if os.path.exists(resume_path):
-
-            with open(resume_path, "rb") as pdf_file:
-
-                st.download_button(
-                    label="📄 Download Resume",
-                    data=pdf_file.read(),
-                    file_name="Vijayadharshan_Resume.pdf",
-                    mime="application/pdf",
-                    use_container_width=True
-                )
-
-        else:
-            st.warning("Resume not found.")
-
-    st.markdown("<div class='section'>Career Objective</div>", unsafe_allow_html=True)
-
+if theme:
     st.markdown("""
+    <style>
+    .stApp{
+        background:#020617;
+        color:white;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+else:
+    st.markdown("""
+    <style>
+    .stApp{
+        background:white;
+        color:black;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-I am an aspiring Artificial Intelligence & Data Science Engineer
-who enjoys building intelligent software using Machine Learning,
-Deep Learning, Data Analytics and Full Stack Development.
+# ============================
+# SIDEBAR
+# ============================
 
-I love solving real-world problems through AI and continuously
-learning modern technologies.
+with st.sidebar:
 
-""")
+    image_path = "assets/profile.png"
 
-    st.markdown("<br>", unsafe_allow_html=True)
+    if os.path.isfile(image_path):
+        try:
+            st.image(image_path, width=180)
+        except Exception:
+            st.warning("Unable to open profile image.")
+    else:
+        st.warning("profile.png not found inside assets folder.")
 
-    st.markdown("<div class='section'>Quick Highlights</div>", unsafe_allow_html=True)
+    st.markdown("## Vijayadharshan R")
+    st.markdown("AI Engineer")
 
-    a, b, c, d = st.columns(4)
+    selected = option_menu(
+        menu_title=None,
+        options=[
+            "Home",
+            "About",
+            "Skills",
+            "Projects",
+            "Certificates",
+            "Contact"
+        ],
+        icons=[
+            "house",
+            "person",
+            "cpu",
+            "code-slash",
+            "award",
+            "telephone"
+        ],
+        default_index=0
+    )
 
-    with a:
-        st.metric("Projects", "3+")
+# ============================
+# PAGE ROUTING
+# ============================
 
-    with b:
-        st.metric("Certificates", "10+")
+if selected == "Home":
+    from pages.home import home
+    home()
 
-    with c:
-        st.metric("Skills", "20+")
+elif selected == "About":
+    from pages.about import about
+    about()
 
-    with d:
-        st.metric("Experience", "AI & DS Student")
+elif selected == "Skills":
+    from pages.skills import skills
+    skills()
+
+elif selected == "Projects":
+    from pages.projects import projects
+    projects()
+
+elif selected == "Certificates":
+    from pages.certificates import certificates
+    certificates()
+
+elif selected == "Contact":
+    from pages.contact import contact
+    contact()
+
+# ============================
+# FOOTER
+# ============================
+
+try:
+    from components.statistics import statistics
+    statistics()
+except Exception:
+    pass
+
+try:
+    from components.footer import footer
+    footer()
+except Exception:
+    pass
